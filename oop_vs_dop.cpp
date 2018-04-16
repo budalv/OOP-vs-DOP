@@ -4,118 +4,118 @@ using std::vector;
 
 namespace ba_foo {
 
-  //-----------------------------------------------------------------------------
-  class Behavior {
-  public:
-    Behavior();
-    ~Behavior();
+//-----------------------------------------------------------------------------
+class Behavior {
+public:
+  Behavior();
+  ~Behavior();
 
-    void mark_behavior();
-    double behavior();
+  void mark_behavior();
+  double behavior();
 
-  private:
-    // lots of data items here, for now we'll keep it simple
-    double data;
-  };
+private:
+  // lots of data items here, for now we'll keep it simple
+  double data;
+};
 
-  Behavior::Behavior() {}
+Behavior::Behavior() {}
 
-  Behavior::~Behavior() {}
+Behavior::~Behavior() {}
 
-  void Behavior::mark_behavior() {
-    data = 1.;  // in reality a big complex, algorithm ofc
-  }
+void Behavior::mark_behavior() {
+  data = 1.;  // in reality a big complex, algorithm ofc
+}
 
-  double Behavior::behavior() { return data; }
+double Behavior::behavior() { return data; }
 
-  //-----------------------------------------------------------------------------
-  class State_data {
-  public:
-    State_data();
-    ~State_data();
+//-----------------------------------------------------------------------------
+class State_data {
+public:
+  State_data();
+  ~State_data();
 
-    void save_state(const double state_dat);
-    double state();
+  void save_state(const double state_dat);
+  double state();
 
-  private:
-    // lots of data items here, for now we'll keep it simple
-    double data;
-  };
+private:
+  // lots of data items here, for now we'll keep it simple
+  double data;
+};
 
-  State_data::State_data() {}
+State_data::State_data() {}
 
-  State_data::~State_data() {}
+State_data::~State_data() {}
 
-  void State_data::save_state(const double state_dat) { data = state_dat; }
+void State_data::save_state(const double state_dat) { data = state_dat; }
 
-  double State_data::state() { return data; }
+double State_data::state() { return data; }
 
-  // Object-oriented
-  //-----------------------------------------------------------------------------
-  struct OOP {
-  public:
-    OOP();
-    ~OOP();
+// Object-oriented
+//-----------------------------------------------------------------------------
+struct OOP {
+public:
+  OOP();
+  ~OOP();
 
-    void oop_update();
+  void oop_update();
 
-  private:
-    Behavior behavior;
-    State_data state;
-  };
+private:
+  Behavior behavior;
+  State_data state;
+};
 
-  OOP::OOP() {
-    // initialize private data
-  }
+OOP::OOP() {
+  // initialize private data
+}
 
-  OOP::~OOP() {}
+OOP::~OOP() {}
 
-  void OOP::oop_update() {
-    // manage behavior and state for each individual struct (record) separately
+void OOP::oop_update() {
+  // manage behavior and state for each individual struct (record) separately
 
+  ;  // do behavior analytics here
+  ;  // track analytics results here
+}
+
+// Data-oriented
+//-----------------------------------------------------------------------------
+struct DOP {
+public:
+  DOP();
+  DOP(const int cnt);
+  ~DOP();
+
+  void dop_update();
+
+private:
+  vector<Behavior> behaviors;
+  vector<State_data> states;
+};
+
+DOP::DOP() {}
+
+DOP::DOP(const int cnt) : behaviors(cnt), states(cnt) {
+  // initialize all system data
+}
+
+DOP::~DOP() {}
+
+void DOP::dop_update() {
+  // manage behavior and state for all structs (records) sequentially, broken up
+  // into distinct phases
+
+  for (auto& e : behaviors)
     ;  // do behavior analytics here
+  for (auto& e : states)
     ;  // track analytics results here
-  }
 
-  // Data-oriented
-  //-----------------------------------------------------------------------------
-  struct DOP {
-  public:
-    DOP();
-    DOP(const int cnt);
-    ~DOP();
-
-    void dop_update();
-
-  private:
-    vector<Behavior> behaviors;
-    vector<State_data> states;
-  };
-
-  DOP::DOP() {}
-
-  DOP::DOP(const int cnt) : behaviors(cnt), states(cnt) {
-    // initialize all system data
-  }
-
-  DOP::~DOP() {}
-
-  void DOP::dop_update() {
-    // manage behavior and state for all structs (records) sequentially, broken up
-    // into distinct phases
-
-    for (auto& e : behaviors)
-      ;  // do behavior analytics here
-    for (auto& e : states)
-      ;  // track analytics results here
-
-    // OPTIMIZATION: For large datasets, manage active/inactive items in separate
-    // DOP private structures with runtime move semantics. Use the same approach
-    // for hot/cold splitting and sparse datasets. This is also very likely the
-    // right time to keep data sorted and/or indexed.
-    // -Remember the goal is to keep as many actionable data items in the cache
-    // line as possible at all times.
-  }
+  // OPTIMIZATION: For large datasets, manage active/inactive items in separate
+  // DOP private structures with runtime move semantics. Use the same approach
+  // for hot/cold splitting and sparse datasets. This is also very likely the
+  // right time to keep data sorted and/or indexed.
+  // -Remember the goal is to keep as many actionable data items in the cache
+  // line as possible at all times.
+}
 
 }  // namespace ba_foo
 
