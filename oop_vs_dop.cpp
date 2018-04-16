@@ -152,7 +152,7 @@ int main() {
   ba_foo::DOP dop{count};           // struct of arrays
 
   //while (processing) {
-  // manage network, disk, etc. activity
+    // manage network, disk, etc. activity
 
     for (auto& e : oops) e.oop_update();
     dop.dop_update();
