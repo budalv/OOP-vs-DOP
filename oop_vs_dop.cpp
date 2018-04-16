@@ -121,7 +121,7 @@ void DOP::dop_update() {
 
 // NOTES:
 // -By sequentially processing long contiguous, compacted memory layout
-// structures of data (the optimized 'struct of arrays' approach) during runtime
+// containers of data (the optimized 'struct of arrays' approach) during runtime
 // -- rather than stepping through different records each with their own private
 // state (the traditional 'array of structs' approach) -- we optimize
 // runtime performance by removing a layer of memory-access indirection with
