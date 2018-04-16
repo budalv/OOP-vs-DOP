@@ -110,7 +110,7 @@ void DOP::dop_update() {
     ;  // track analytics results here
 
   // OPTIMIZATION: For large datasets, manage active/inactive items in separate
-  // DOP private structures with runtime move semantics. Use the same approach
+  // DOP private containers with runtime move semantics. Use the same approach
   // for hot/cold splitting and sparse datasets. This is also very likely the
   // right time to keep data sorted and/or indexed.
   // -Remember the goal is to keep as many actionable data items in the cache
